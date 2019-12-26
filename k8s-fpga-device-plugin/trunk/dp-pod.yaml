@@ -15,14 +15,18 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: mypod
+  name: lma-fpga-pod
+  #  namespace: kube-system
 spec:
   containers:
-  - name: mypod
-    image: xilinxatg/fpga-verify:latest
-    resources:
-      limits:
-        xilinx.com/fpga-xilinx_u200_xdma_201820_1-1535712995: 1
-    command: ["/bin/sh"]
-    args: ["-c", "while true; do echo hello; sleep 10;done"]	
+    - name: fpga-pod
+      image: xilinxatg/fpga-verify:latest
+      resources:
+        limits:
+          #xilinx.com/fpga-xilinx_u200_xdma_201820_1-1535712995: 1
+          #xilinx.com/fpga-xilinx_aws-vu9p-f1-04261818_dynamic_5_0-0: 1
+          #xilinx.com/fpga-xilinx_aws-vu9p-f1-04261818_dynamic_5_0-0: 1
+          xilinx.com/fpga-xilinx_aws-vu9p-f1_dynamic_5_0-43981: 1
+      command: ["/bin/sh"]
+      args: ["-c", "while true; do echo Hello, we are running; sleep 10; done"]
 
