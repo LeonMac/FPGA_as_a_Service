@@ -12,20 +12,28 @@
 #WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #See the License for the specific language governing permissions and
 #limitations under the License.
+---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: fpga-pod-dfns
+  name: lma-fpga-pod
+  #labels:
+  #  app: fpga
   #  namespace: kube-system
 spec:
   containers:
-    - name: fpga-pod-df
+    - name: lma-fpga-container
       image: xilinxatg/fpga-verify:latest
       resources:
         limits:
           #xilinx.com/fpga-xilinx_u200_xdma_201820_1-1535712995: 1
-          #xilinx.com/fpga-xilinx_aws-vu9p-f1-04261818_dynamic_5_0-0: 1
-          #xilinx.com/fpga-xilinx_aws-vu9p-f1-04261818_dynamic_5_0-0: 1
           xilinx.com/fpga-xilinx_aws-vu9p-f1_dynamic_5_0-43981: 1
       command: ["/bin/sh"]
-      args: ["-c", "while true; do echo Hello, we are running; sleep 10; done"]
+      args: ["-c", "while true; do echo lma1-fpga-pod runs; sleep 20; done"]
+      volumeMounts:
+        - name: sys
+          mountPath: /sys
+  volumes:
+    - name: sys
+      hostPath:
+        path: /sys
