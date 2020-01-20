@@ -21,7 +21,7 @@ metadata:
 spec:
   containers:
     - name: fpga-pod-ks
-      image: lma-fpga-pod:0.1
+      image: lma-fpga-pod:0.2
       resources:
         limits:
           xilinx.com/fpga-xilinx_aws-vu9p-f1_dynamic_5_0-43981: 1
