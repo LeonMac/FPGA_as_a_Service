@@ -21,7 +21,6 @@ metadata:
   name: fpga-device-plugin-daemonset
   namespace: kube-system
 spec:
-# if run with k8s v1.16+, these 3 lines are also required
   selector:
     matchLabels:
       name: xilinx-fpga-device-plugin

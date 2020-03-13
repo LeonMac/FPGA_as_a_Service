@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fpga-zksnark-pod
+spec:
+  containers:
+    - name: fpga-zksnark-container
+      image: macleonsh/zksnark-pod:0.1
+      volumeMounts:
+        - mountPath: /home/ubuntu
+          #name: aws-fpga-folder
+          #name: zcash-folder
+          name: aws-folder
+      resources:
+        limits:
+          xilinx.com/fpga-xilinx_aws-vu9p-f1_dynamic_5_0-43981: 1
+      command: ["/bin/sh"]
+      args: ["-c", "while true; do echo fpga-pod-2 runs up; sleep 100; done"]
+  volumes:
+    - name: aws-folder
+      hostPath:
+        path: /home/ubuntu/aws-fpga
+        type: Directory
+  # - name: zcash-folder
+      hostPath:
+        path: /home/ubuntu/zcash-fpga
+        type: Directory
+
